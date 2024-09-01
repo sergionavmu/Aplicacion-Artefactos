@@ -1,0 +1,31 @@
+version: '3.6'
+services:
+  db:
+    image: mysql:5.7
+    hostname: localhost
+    networks:
+      - lan
+    environment:
+      MYSQL_DATABASE: gym
+      MYSQL_USER: root
+      MYSQL_PASSWORD: jupiter
+      MYSQL_ROOT_PASSWORD: jupiter*
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    ports:
+      - 8081:8081
+    networks:
+      - lan
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  lan:
+    driver: bridge
